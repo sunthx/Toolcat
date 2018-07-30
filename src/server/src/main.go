@@ -22,6 +22,7 @@ func guidHandleRequest(writer http.ResponseWriter,request *http.Request) {
 	}
 
 	writer.Header().Set("Content-Type","application/json")
+	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	writer.Write(value)
 	return
 }

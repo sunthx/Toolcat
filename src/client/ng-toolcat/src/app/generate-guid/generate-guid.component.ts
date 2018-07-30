@@ -14,7 +14,7 @@ export class GenerateGuidComponent implements OnInit {
 
   public generateGuid(): void {
     this.guidService.new().subscribe((data: object) => {
-      console.log(data);
+      this.newGuid = data['Content'];
     });
   }
 }

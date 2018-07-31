@@ -1,0 +1,10 @@
+header,
+footer {
+    flex: 1
+}
+
+.content {
+    flex: 1;
+    min-height: 100vh;
+    display: flex;
+}

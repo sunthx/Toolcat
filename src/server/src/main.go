@@ -1,28 +1,33 @@
 package main
 
 import (
-	"./guid"
 	"net/http"
-	"encoding/json"
 	"fmt"
+	"file"
+	"time"
+	"guid"
 )
 
 func main() {
-	fmt.Print("toolcat running ...")
-	http.HandleFunc("/guid/new",guidHandleRequest)
-	http.ListenAndServe(":8090",nil)
-}
+	fmt.Println(time.Now().String())
+	fmt.Print("Toolcat Running ...")
 
-func guidHandleRequest(writer http.ResponseWriter,request *http.Request) {
+	mux := http.NewServeMux()
 
-	newGuid := guid.New()
-	value,err := json.Marshal(&newGuid)
-	if err != nil{
-		return
+	//静态文件
+	fileServer := http.FileServer(http.Dir("./public/files/"))
+
+
+	http.StripPrefix("/static/",fileServer)
+
+	mux.Handle("/static/",http.StripPrefix("/static/",fileServer))
+	mux.HandleFunc("/guid/new",guid.GuidHandler)
+	mux.HandleFunc("/file/upload",file.UploadFileHandler)
+
+	server := &http.Server{
+		Addr:":8090",
+		Handler:mux,
 	}
 
-	writer.Header().Set("Content-Type","application/json")
-	writer.Header().Set("Access-Control-Allow-Origin", "*")
-	writer.Write(value)
-	return
+	server.ListenAndServe()
 }

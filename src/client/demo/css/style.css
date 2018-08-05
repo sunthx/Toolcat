@@ -2,3 +2,22 @@ body {
     margin: 0;
     padding: 0;
 }
+
+.element {
+    background-color: beige;
+    height: 100px;
+}
+
+.header {
+    min-height: 80px;
+    padding-left: 20px;
+}
+
+.nav-item-width {
+    width: 100px;
+    text-align: center;
+}
+
+.sider{
+    padding: 10px 0px 0px 0px;
+}

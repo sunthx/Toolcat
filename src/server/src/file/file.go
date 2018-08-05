@@ -11,7 +11,6 @@ import (
 	"models"
 )
 
-var fileStoragePath = "./public/files"
 
 func UploadFileHandler(writer http.ResponseWriter, request *http.Request){
 	request.ParseMultipartForm(1024*1024*1024)
@@ -30,7 +29,7 @@ func UploadFileHandler(writer http.ResponseWriter, request *http.Request){
 	fileId := guid.New().Content
 	fileExt := path.Ext(file.Filename)
 	fileName := fileId + fileExt
-	result,err := common.SaveFile(fileStoragePath,fileName,data)
+	result,err := common.SaveFile(fileName,data)
 	if err != nil || !result{
 		return
 	}
@@ -52,6 +51,7 @@ func UploadFileHandler(writer http.ResponseWriter, request *http.Request){
 	writer.Header().Set("Access-Control-Allow-Origin", "*")
 	writer.Write(value)
 }
+
 
 
 

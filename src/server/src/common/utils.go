@@ -5,7 +5,10 @@ import (
 	"strings"
 	"os"
 	"io/ioutil"
+	"guid"
 )
+
+var fileStoragePath = "./public/files"
 
 func GetRequestUrl(request *http.Request) string{
 	scheme := "http://"
@@ -29,16 +32,23 @@ func PathExists(path string)(bool,error){
 	return false,err
 }
 
-
-func SaveFile(dir string,fileName string,data []byte) (bool,error){
-	exist,err := PathExists(dir)
+func SaveFile(fileName string,data []byte) (bool,error){
+	exist,err := PathExists(fileStoragePath)
 	if err == nil && !exist{
-		os.Mkdir(dir,os.ModePerm)
+		os.Mkdir(fileStoragePath,os.ModePerm)
 	}
 
-	filePath := dir + "/" + fileName
+	filePath := fileStoragePath + "/" + fileName
 	os.Create(filePath)
-	ioutil.WriteFile(dir + "/"+fileName,data, os.ModePerm)
+	ioutil.WriteFile(fileStoragePath + "/"+fileName,data, os.ModePerm)
 
 	return true,nil
+}
+
+func GetRandomFilePath() string{
+	return GetFullFilePath(guid.New().Content)
+}
+
+func GetFullFilePath(fileId string) string{
+	return fileStoragePath + "/" + fileId
 }

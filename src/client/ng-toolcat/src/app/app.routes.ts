@@ -4,11 +4,12 @@ import { AboutComponent } from './about/about.component';
 export const AppRoutes = [
     {
         path: '',
-        component: HomeComponent
+        redirectTo: 'home',
+        pathMatch: 'full'
     },
     {
         path: 'home',
-        component: HomeComponent
+        loadChildren: './home/home.module#HomeModule'
     },
     {
         path: 'about',
@@ -16,6 +17,7 @@ export const AppRoutes = [
     },
     {
         path: '**',
-        component: HomeComponent
+        redirectTo: 'home',
+        pathMatch: 'full'
     }
 ];

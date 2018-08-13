@@ -1,9 +1,20 @@
-<div class="input-group mb-3">
-  <input value="{{newGuid}}" type="text" class="form-control">
-  <div class="input-group-append">
-    <button 
-      (click)="generateGuid()"
-      class="btn btn-outline-secondary" 
-      type="button">Generate</button>
+<div class="row">
+  <div class="col-12">
+    <div class="input-group input-group-lg">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-lg">UUID：</span>
+      </div>
+      <input value="{{newGuid}}" type="text" class="form-control" readonly>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-2">
+    <button (click)="generateGuid()" type="button" class="btn btn-light btn-block">生成</button>
+  </div>
+
+  <div class="col-2">
+    <button type="button" class="btn btn-light btn-block">复制到粘贴板</button>
   </div>
 </div>

@@ -39,10 +39,15 @@ func SaveFile(fileName string,data []byte) (bool,error){
 	}
 
 	filePath := fileStoragePath + "/" + fileName
-	os.Create(filePath)
-	ioutil.WriteFile(fileStoragePath + "/"+fileName,data, os.ModePerm)
+	newFile,_ := os.Create(filePath)
+	defer newFile.Close()
 
+	ioutil.WriteFile(fileStoragePath + "/"+fileName,data, os.ModePerm)
 	return true,nil
+}
+
+func GetRandomId() string{
+	return guid.New().Content
 }
 
 func GetRandomFilePath() string{

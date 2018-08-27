@@ -6,8 +6,7 @@ import (
 	"file"
 	"time"
 	"guid"
-	"pdf"
-)
+	)
 
 func main() {
 	fmt.Println(time.Now().String())
@@ -22,7 +21,7 @@ func main() {
 	mux.Handle("/static/",http.StripPrefix("/static/",fileServer))
 	mux.HandleFunc("/guid/new",guid.GuidHandler)
 	mux.HandleFunc("/file/upload",file.UploadFileHandler)
-	mux.HandleFunc("/pdf/2img",pdf.PdfFileHandler)
+	//mux.HandleFunc("/pdf/2img",pdf.PdfFileHandler)
 
 	server := &http.Server{
 		Addr:":8090",

@@ -4,22 +4,19 @@ import (
 	"fmt"
 	"net/http"
 	"time"
+	"api"
 )
 
 func main() {
-	fmt.Println(time.Now().String())
-	fmt.Print("Toolcat Running ...")
-
+	fmt.Print("Toolcat Start Running ... " + time.Now().String())
 	mux := http.NewServeMux()
 
 	//静态文件
 	fileServer := http.FileServer(http.Dir("./public/files/"))
 	http.StripPrefix("/static/", fileServer)
 
-	//mux.Handle("/static/", http.StripPrefix("/static/", fileServer))
-	//mux.HandleFunc("/guid/new", guid.GuidHandler)
-	//mux.HandleFunc("/file/upload", file.UploadFileHandler)
-	//mux.HandleFunc("/pdf/2img",pdf.PdfFileHandler)
+	mux.Handle("/static/", http.StripPrefix("/static/", fileServer))
+	mux.HandleFunc("/guid/new", api.Guid)
 
 	server := &http.Server{
 		Addr:    ":8090",

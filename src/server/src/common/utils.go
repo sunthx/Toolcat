@@ -6,7 +6,6 @@ import (
 	"strings"
 )
 
-
 //GetRequestURL 获取请求的URL
 func GetRequestURL(request *http.Request) string {
 	scheme := "http://"
@@ -30,4 +29,3 @@ func PathExist(path string) (bool, error) {
 
 	return false, err
 }
-

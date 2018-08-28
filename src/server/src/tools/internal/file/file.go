@@ -1,22 +1,22 @@
 package file
 
 import (
-			"io/ioutil"
-					"common"
-		"models"
-	"tools/internal/guid"
+	"common"
+	"io/ioutil"
+	"models"
 	"os"
+	"tools/internal/guid"
 )
 
 var fileStoragePath = "./public/files"
 
 //CreateEmptyFile 通过指定文件扩展名生成一个未使用的文件对象
-func CreateEmptyFile(ext string) models.File{
+func CreateEmptyFile(ext string) models.File {
 	fileID := guid.New()
 
 	return models.File{
-		FileId:fileID,
-		FileName:fileID + "." + ext,
+		FileId:   fileID,
+		FileName: fileID + "." + ext,
 	}
 }
 
@@ -35,7 +35,6 @@ func SaveFile(fileName string, data []byte) (bool, error) {
 	filePath := fileStoragePath + "/" + fileName
 	newFile, _ := os.Create(filePath)
 	defer newFile.Close()
-
 
 	ioutil.WriteFile(fileStoragePath+"/"+fileName, data, os.ModePerm)
 	return true, nil
@@ -80,7 +79,3 @@ func SaveFile(fileName string, data []byte) (bool, error) {
 //	writer.Header().Set("Access-Control-Allow-Origin", "*")
 //	writer.Write(value)
 //}
-
-
-
-
